@@ -13,8 +13,8 @@
               id="fullname"
               class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
               type="text"
-              placeholder="iMoney..."
-              autocomplete="username"
+              placeholder="Fullname..."
+              v-model="fullname"
             />
           </label>
         </div>
@@ -26,6 +26,8 @@
               class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
               type="email"
               placeholder="example@gmail.com"
+              v-model="email"
+              autocomplete="email"
             />
           </label>
         </div>
@@ -37,18 +39,30 @@
               class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
               type="password"
               placeholder="Password..."
+              v-model="password"
             />
           </label>
         </div>
         <div class="row">
           <button
-            class="py-3 w-full text-center bg-primary text-white font-bold rounded-lg"
+            :disabled="isPending"
+            class="py-3 w-full disabled:cursor-not-allowed text-center disabled:opacity-50 bg-primary text-white font-bold rounded-lg"
             type="submit"
           >
-            Sign Up
+            <span v-if="!isPending">Sign Up</span>
+            <span v-if="isPending">Processing...</span>
           </button>
         </div>
       </form>
+      <!-- Start: Error -->
+      <!-- <div v-if="error"> -->
+      <div
+        v-if="error"
+        class="text-rose-600 text-left font-semibold mt-4 text-sm"
+      >
+        {{ error }}
+      </div>
+      <!-- </div> -->
       <!-- Start: Direction -->
       <div class="w-full text-center mt-6">
         <span class="font-semibold">I'm already a member.</span>
@@ -64,11 +78,20 @@
   </div>
 </template>
 <script>
+import { ref } from "vue";
+import { useSignUp } from "@/composables/useSignUp";
 export default {
   name: "RegisterView",
   setup() {
-    function onSubmit() {}
-    return { onSubmit };
+    const { error, isPending, signup } = useSignUp();
+    const fullname = ref("");
+    const email = ref("");
+    const password = ref("");
+
+    async function onSubmit() {
+      await signup(email.value, password.value, fullname.value);
+    }
+    return { onSubmit, fullname, email, error, isPending, password };
   },
 };
 </script>
