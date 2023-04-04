@@ -26,6 +26,7 @@
               class="px-4 py-3 rounded-lg border border-gray-100 mt-1"
               type="password"
               placeholder="Password..."
+              autocomplete="password"
             />
           </label>
         </div>

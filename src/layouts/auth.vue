@@ -1,6 +1,8 @@
 <template>
-  <navigation-brand />
-  <slot />
+  <div>
+    <navigation-brand />
+    <slot />
+  </div>
 </template>
 <script>
 import NavigationBrand from "@/components/NavigationBrand.vue";
