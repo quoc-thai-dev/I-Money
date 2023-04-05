@@ -79,17 +79,20 @@
 </template>
 <script>
 import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { useSignUp } from "@/composables/useSignUp";
 export default {
   name: "RegisterView",
   setup() {
     const { error, isPending, signup } = useSignUp();
+    const router = useRouter();
     const fullname = ref("");
     const email = ref("");
     const password = ref("");
 
     async function onSubmit() {
       await signup(email.value, password.value, fullname.value);
+      if (!error.value) router.push({ name: "Home", params: {} });
     }
     return { onSubmit, fullname, email, error, isPending, password };
   },

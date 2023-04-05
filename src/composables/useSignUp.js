@@ -7,7 +7,7 @@ const isPending = ref(false);
 async function signup(email, password, fullname) {
   isPending.value = true;
   error.value = null;
-  createUserWithEmailAndPassword(projectAuth, email, password)
+  await createUserWithEmailAndPassword(projectAuth, email, password)
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user;
