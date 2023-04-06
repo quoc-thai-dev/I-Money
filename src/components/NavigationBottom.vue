@@ -6,69 +6,58 @@
     <div class="container mx-auto px-8 h-full">
       <ul class="flex justify-between h-full items-center">
         <li v-for="(nav, index) in navItems" :key="index">
-          <router-link :to="{ name: nav.name, params: {} }">
+          <router-link
+            :to="{ name: nav.name, params: {} }"
+            class="cursor-pointer"
+          >
             <i class="t2ico text-3xl" :class="nav.icon"></i>
           </router-link>
         </li>
       </ul>
+    </div>
+    <div
+      data-circle
+      class="absolute top-0 left-1/2 transform -translate-x-1/2"
+    ></div>
+    <div
+      data-cirle-inset
+      class="absolute cursor-pointer flex justify-center items-center w-12 h-12 rounded-full text-white bg-primary left-1/2 -top-6 transform -translate-x-1/2"
+      @click="goToRoute"
+    >
+      <i class="t2ico t2ico-plus"></i>
     </div>
   </footer>
 </template>
 
 <script>
 import { reactive } from "vue";
+import { useRouter } from "vue-router";
+import { NAV_BOTTOM_ITEMS } from "@/constants";
 export default {
   name: "NavigationBottomComponent",
   setup() {
-    const navItems = reactive([
-      {
-        icon: "t2ico-category",
-        text: "Home",
-        name: "Home",
-      },
-      {
-        icon: "t2ico-chart",
-        text: "Report",
-        name: "Home",
-      },
-      {
-        icon: "t2ico-presentation",
-        text: "Budget",
-        name: "Home",
-      },
-      {
-        icon: "t2ico-profile",
-        text: "Profile",
-        name: "Profile",
-      },
-    ]);
-    return { navItems };
+    const router = useRouter();
+    const navItems = reactive(NAV_BOTTOM_ITEMS);
+    const goToRoute = function () {
+      router.push({ name: "NewTransaction", params: {} });
+    };
+    return { navItems, goToRoute };
   },
 };
 </script>
 
 <style lang="css" scoped>
-footer#footer::before {
-  @apply absolute;
+footer#footer > div[data-circle] {
   @apply bg-dark-light;
-  content: "";
   width: 60px;
   height: 30px;
-  border-bottom-left-radius: 60px;
-  border-bottom-right-radius: 60px;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
-footer#footer::after {
-  @apply absolute -top-6 flex justify-center items-center text-white;
-  @apply w-12 h-12 bg-primary rounded-full;
-
-  content: "\e921";
-  font-family: "t2ico";
-
-  left: 50%;
-  transform: translateX(-50%);
-  cursor: pointer;
+footer#footer ul li:nth-child(2) {
+  margin-right: 10%;
+}
+footer#footer ul li:nth-child(3) {
+  margin-left: 10%;
 }
 </style>

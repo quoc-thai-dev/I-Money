@@ -13,6 +13,10 @@ const routes = [
   {
     path: "/",
     name: "Home",
+    meta: {
+      name: "Hello,  Thái",
+      leading: true,
+    },
     component: () =>
       import(/* webpackChunkName: "home" */ "../views/index.vue"),
   },
@@ -21,6 +25,8 @@ const routes = [
     name: "Register",
     meta: {
       layout: "auth",
+      name: "Hello,  Thái",
+      leading: true,
     },
     component: () =>
       import(/* webpackChunkName: "register" */ "../views/register.vue"),
@@ -30,6 +36,8 @@ const routes = [
     name: "Login",
     meta: {
       layout: "auth",
+      name: "Hello,  Thái",
+      leading: true,
     },
     component: () =>
       import(/* webpackChunkName: "register" */ "../views/login.vue"),
@@ -37,9 +45,48 @@ const routes = [
   {
     path: "/profile",
     name: "Profile",
+    meta: {
+      name: "Profile",
+      leading: false,
+    },
     beforeEnter: requireAuth,
     component: () =>
       import(/* webpackChunkName: "profile" */ "../views/profile.vue"),
+  },
+  {
+    path: "/report",
+    name: "Report",
+    meta: {
+      name: "Hello,  Thái",
+      leading: true,
+    },
+    beforeEnter: requireAuth,
+    component: () =>
+      import(/* webpackChunkName: "report" */ "../views/report.vue"),
+  },
+  {
+    path: "/budget",
+    name: "Budget",
+    meta: {
+      name: "Hello,  Thái",
+      leading: true,
+    },
+    beforeEnter: requireAuth,
+    component: () =>
+      import(/* webpackChunkName: "budget" */ "../views/budget.vue"),
+  },
+  {
+    path: "/new-transaction",
+    name: "NewTransaction",
+    meta: {
+      name: "Hello,  Thái",
+      leading: true,
+    },
+    beforeEnter: requireAuth,
+    component: () =>
+      import(
+        /* webpackChunkName: "new-transaction" */ "../views/new-transaction.vue"
+      ),
   },
   {
     path: "/logout",

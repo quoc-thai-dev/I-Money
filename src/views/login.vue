@@ -29,13 +29,13 @@
               placeholder="Password..."
               autocomplete="password"
               v-model="password"
-              @input="onCheckShowButton()"
+              @input="onCheckShowButton"
               @focusout="showButton = false"
-              @focusin="onCheckShowButton()"
+              @focusin="onCheckShowButton"
             />
           </label>
           <button
-            @click="onShowPassword()"
+            @click="onShowPassword"
             v-show="showButton"
             type="button"
             class="absolute flex z-100 top-8 px-4 py-3 right-1 text-sm"
